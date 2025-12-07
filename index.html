@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AIGODS • The Future of Artificial Intelligence</title>
+  <meta name="description" content="AIGODS - The only AI token backed by Tesla, BlackRock, and $1B+ in funding. Presale Live at $0.2 → Listing $1.00 (5x)"/>
+  <link href="https://fonts.googleapis.com/css2?family=Neue+Machina:wght@400;700;800&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --cyan: #00ffff;
+      --magenta: #ff00ff;
+      --black: #000000;
+      --dark: #0a0a1f;
+      --text: #e0faff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Video Background */
+    #bgvid {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+      z-index: -2; opacity: 0.7;
+    }
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,30,0.92), rgba(60,0,120,0.7));
+      z-index: -1;
+    }
+
+    #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1; /* Above video, below content */
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .launch-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--magenta), var(--cyan));
+      color: #000;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Neue Machina', sans-serif;
+      font-size: clamp(4rem, 10vw, 10rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 1rem 0;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      max-width: 900px;
+      margin: 2rem auto;
+      opacity: 0.95;
+    }
+
+    .highlight { color: var(--cyan); font-weight: 900; }
+
+    .card {
+      background: rgba(15, 15, 40, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 2rem;
+      padding: 3.5rem 2rem;
+      margin: 4rem auto;
+      max-width: 1100px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    /* YouTube Video Section */
+    .video-section {
+        margin: 5rem auto;
+        max-width: 900px;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+    }
+    .video-section iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+
+    /* Wallet Buttons */
+    .wallet-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .wbtn {
+      padding: 1.2rem 2.5rem;
+      border: none;
+      border-radius: 1.5rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+    .bnb { background: #f0b90b; color: #000; }
+    .polygon { background: #8247e5; color: #fff; }
+    .solana { background: #14f195; color: #000; }
+    .wbtn:hover { transform: translateY(-8px); }
+
+    .buy-section {
+      margin: 3rem 0;
+    }
+    input#amount {
+      padding: 1.3rem;
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid var(--cyan);
+      border-radius: 1.5rem;
+      color: white;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    .buy-btn {
+      margin-top: 1.5rem;
+      padding: 1.4rem 4rem;
+      background: linear-gradient(90deg, var(--magenta), var(--cyan));
+      color: #000;
+      border: none;
+      border-radius: 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+    .buy-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,255,255,0.4); }
+
+
+    .rate {
+      font-size: 1.8rem;
+      color: #00ff88;
+      margin: 2rem 0;
+      font-weight: 700;
+    }
+
+    .airdrop-btn {
+      background: linear-gradient(90deg, #00ff00, #00ff88);
+      color: #000;
+      padding: 1.5rem 5rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1.8rem;
+      font-weight: 900;
+      cursor: pointer;
+      margin: 3rem 0;
+      transition: all 0.4s;
+    }
+    .airdrop-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,255,136,0.4); }
+    .airdrop-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .referral-section {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: rgba(0,0,0,0.2);
+        border-radius: 1rem;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .referral-section h3 {
+        font-size: 2rem;
+        color: var(--magenta);
+        margin-bottom: 1.5rem;
+    }
+    .referral-input-group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    #referralLink {
+        flex-grow: 1;
+        max-width: 400px;
+        padding: 1rem 1.5rem;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid var(--magenta);
+        border-radius: 0.75rem;
+        color: white;
+        font-size: 1.1rem;
+        text-align: center;
+        cursor: text;
+    }
+    .copy-btn {
+        padding: 1rem 2rem;
+        background: var(--magenta);
+        color: #000;
+        border: none;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .copy-btn:hover { background: #ff55ff; }
+
+    .partners {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      margin: 5rem 0;
+    }
+    .partners img {
+      height: 60px;
+      filter: brightness(1.4);
+      transition: 0.4s;
+      object-fit: contain; /* Ensure logos fit without distortion */
+      max-width: 120px; /* Limit width to prevent oversized logos */
+    }
+    .partners img:hover { transform: scale(1.3); }
+
+    .socials {
+      margin: 4rem 0;
+    }
+    .socials a {
+      color: white;
+      margin: 0 1.5rem;
+      font-size: 2.5rem;
+      transition: 0.3s;
+      text-decoration: none; /* Remove underline from links */
+    }
+    .socials a:hover { color: var(--cyan); transform: translateY(-5px); }
+
+    #status {
+      margin: 1.5rem 0;
+      font-size: 1.3rem;
+      color: #00ff88;
+      font-weight: bold;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .card { padding: 2.5rem 1.5rem; }
+      .wallet-grid { gap: 1rem; }
+      .wbtn { padding: 1rem 1.8rem; font-size: 1.1rem; }
+      .airdrop-btn, .buy-btn { padding: 1rem 2.5rem; font-size: 1.4rem; }
+      .referral-input-group { flex-direction: column; align-items: center; }
+      #referralLink { width: 90%; }
+      .copy-btn { width: 90%; max-width: 400px; }
+      .partners img { height: 45px; margin-bottom: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop playsinline id="bgvid">
+    <source src="https://cdn.coverr.co/videos/coverr-futuristic-ai-grid-8418/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <div class="launch-badge">LAUNCHING SOON – $1 BILLION+ BACKED</div>
+    <h1>AIGODS</h1>
+    <p class="hero-desc">
+      <strong>AIGODS</strong> is the world's first decentralized superintelligence token, built to power the next generation of AI agents, autonomous economies, and human-AI symbiosis.<br><br>
+      Backed by <span class="highlight">Tesla, BlackRock, Twitter/X, OpenAI, NVIDIA, Google</span> and over $1 billion in committed capital, AIGODS is not just a token — it is the infrastructure layer for the entire future of artificial intelligence.
+    </p>
+
+    <!-- YouTube Video Section -->
+    <div class="card video-section">
+        <h2 style="color:var(--cyan);font-size:2.5rem;margin-bottom:2rem;">Explore the Future of AI Gods</h2>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ" 
+                title="AI Gods Project Showcase" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:3rem;color:var(--cyan);margin-bottom:2rem;">TOKENOMICS</h2>
+      <p style="font-size:1.8rem;line-height:2.2;">
+        Symbol: <strong>AIGODS</strong> • Decimals: 18 • Total Supply: 700,000,000<br><br>
+        Presale Price: <strong>$0.20</strong> → Listing Price: <strong>$0.95 – $1.00</strong><br>
+        <span style="color:#00ff00;font-size:2.8rem;font-weight:900;">→ 4.75× – 5× POTENTIAL</span>
+      </p>
+
+      <div class="wallet-grid">
+        <button class="wbtn bnb" onclick="connectChain(56)">BNB Chain</button>
+        <button class="wbtn polygon" onclick="connectChain(137)">Polygon</button>
+        <button class="wbtn solana" onclick="connectSolana()">Solana</button>
+      </div>
+      <div id="status">Click a chain to connect wallet</div>
+
+      <div class="buy-section">
+        <input type="text" id="amount" placeholder="Enter amount (BNB/MATIC/SOL)">
+        <button class="buy-btn" id="buyBtn" disabled>BUY AIGODS NOW</button>
+        <div class="rate">Live Rate: 1 BNB ≈ 5,000 AIGODS</div>
+      </div>
+
+      <button class="airdrop-btn" id="airdropBtn" disabled>CLAIM 100 AIGODS FREE</button>
+
+      <div class="referral-section">
+        <h3>50% Referral Commission</h3>
+        <p style="font-size:1.3rem;margin-bottom:1rem;">
+            Invite friends and earn 50% of their purchase instantly! Share your unique referral link:
+        </p>
+        <div class="referral-input-group">
+            <input type="text" id="referralLink" value="Connect wallet to generate referral link" readonly />
+            <button class="copy-btn" onclick="copyReferralLink()">Copy Link</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="color:var(--cyan);font-size:3rem;margin-bottom:3rem;">Backed by Titans & Innovators</h2>
+      <div class="partners">
+        <img src="https://cryptologos.cc/logos/blackrock.png" alt="BlackRock">
+        <img src="https://cryptologos.cc/logos/tesla-tsla-logo.png" alt="Tesla">
+        <img src="https://cryptologos.cc/logos/twitter-x-logo.png" alt="Twitter/X">
+        <img src="https://cryptologos.cc/logos/openai.png" alt="OpenAI">
+        <img src="https://cryptologos.cc/logos/nvidia-nvda-logo.png" alt="NVIDIA">
+        <img src="https://cryptologos.cc/logos/google-goog-logo.png" alt="Google">
+        <img src="https://cryptologos.cc/logos/microsoft-msft-logo.png" alt="Microsoft">
+        <img src="https://cryptologos.cc/logos/apple-aapl-logo.png" alt="Apple">
+        <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="Binance">
+        <img src="https://cryptologos.cc/logos/coinbase-coin-logo.png" alt="Coinbase">
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum">
+        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana">
+        <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="Polygon">
+        <img src="https://cryptologos.cc/logos/avalanche-avax-logo.png" alt="Avalanche">
+        <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano">
+        <img src="https://cryptologos.cc/logos/ripple-xrp-logo.png" alt="Ripple">
+        <img src="https://cryptologos.cc/logos/chainlink-link-logo.png" alt="Chainlink">
+        <img src="https://cryptologos.cc/logos/uniswap-uni-logo.png" alt="Uniswap">
+        <img src="https://cryptologos.cc/logos/decentraland-mana-logo.png" alt="Decentraland">
+        <img src="https://cryptologos.cc/logos/shiba-inu-shib-logo.png" alt="Shiba Inu">
+      </div>
+    </div>
+
+    <div class="socials">
+      <a href="#" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+      <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+      <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <footer>
+      <p>© 2025 AI Gods – The Intelligence Layer of Web3</p>
+    </footer>
+  </div>
+
+  <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 100 },
+        "color": { "value": ["#00ffff", "#ff00ff"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.6 },
+        "size": { "value": 4 },
+        "line_linked": { "enable": true, "color": "#00ffff", "opacity": 0.3 },
+        "move": { "speed": 2 }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "repulse" } }
+      }
+    });
+
+    let currentAccount = null;
+    const status = document.getElementById('status');
+    const buyBtn = document.getElementById('buyBtn');
+    const airdropBtn = document.getElementById('airdropBtn');
+    const referralLinkInput = document.getElementById('referralLink');
+
+    // Function to check if a wallet has already claimed the airdrop
+    function hasClaimedAirdrop(address) {
+        return localStorage.getItem(`aigods_airdrop_claimed_${address}`) === 'true';
+    }
+
+    // Function to mark a wallet as having claimed the airdrop
+    function markAirdropClaimed(address) {
+        localStorage.setItem(`aigods_airdrop_claimed_${address}`, 'true');
+    }
+
+    async function connectChain(chainId) {
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x' + chainId.toString(16) }],
+          });
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          currentAccount = accounts[0];
+          status.innerHTML = `Connected: ${currentAccount.slice(0,6)}...${currentAccount.slice(-4)}`;
+          buyBtn.disabled = false;
+          
+          // Generate referral link
+          referralLinkInput.value = `${window.location.origin}?ref=${currentAccount}`;
+
+          // Check airdrop status
+          if (hasClaimedAirdrop(currentAccount)) {
+              airdropBtn.disabled = true;
+              airdropBtn.textContent = "AIRDROP CLAIMED!";
+              airdropBtn.style.background = "#555";
+              airdropBtn.style.cursor = "not-allowed";
+          } else {
+              airdropBtn.disabled = false;
+              airdropBtn.textContent = "CLAIM 100 AIGODS FREE";
+              airdropBtn.style.background = "linear-gradient(90deg, #00ff00, #00ff88)";
+              airdropBtn.style.cursor = "pointer";
+          }
+
+        } catch (e) {
+          status.innerHTML = "Connection failed or cancelled";
+          buyBtn.disabled = true;
+          airdropBtn.disabled = true;
+          referralLinkInput.value = "Connect wallet to generate referral link";
+        }
+      } else {
+        alert("Please install MetaMask or Trust Wallet to connect.");
+      }
+    }
+
+    function connectSolana() {
+      if (window.solana?.isPhantom) {
+        window.solana.connect().then(() => {
+          currentAccount = window.solana.publicKey.toString();
+          status.innerHTML = `Solana Connected: ${currentAccount.slice(0,6)}...${currentAccount.slice(-4)}`;
+          buyBtn.disabled = false;
+
+          // Generate referral link
+          referralLinkInput.value = `${window.location.origin}?ref=${currentAccount}`;
+
+          // Check airdrop status
+          if (hasClaimedAirdrop(currentAccount)) {
+              airdropBtn.disabled = true;
+              airdropBtn.textContent = "AIRDROP CLAIMED!";
+              airdropBtn.style.background = "#555";
+              airdropBtn.style.cursor = "not-allowed";
+          } else {
+              airdropBtn.disabled = false;
+              airdropBtn.textContent = "CLAIM 100 AIGODS FREE";
+              airdropBtn.style.background = "linear-gradient(90deg, #00ff00, #00ff88)";
+              airdropBtn.style.cursor = "pointer";
+          }
+
+        }).catch(e => {
+            status.innerHTML = "Solana connection failed or cancelled";
+            buyBtn.disabled = true;
+            airdropBtn.disabled = true;
+            referralLinkInput.value = "Connect wallet to generate referral link";
+        });
+      } else {
+        alert("Please install Phantom Wallet to connect.");
+      }
+    }
+
+    // Buy button functionality - explains payment flow
+    buyBtn.onclick = () => {
+        if (!currentAccount) {
+            alert("Please connect your wallet first!");
+            return;
+        }
+        alert("Simulating purchase: Your funds would be sent to the AI Gods smart contract to buy tokens at the presale price. In a live dApp, your connected wallet (MetaMask/Phantom) would prompt you to confirm the transaction.");
+        // In a real dApp, this would trigger a web3 transaction:
+        // window.ethereum.request({
+        //     method: 'eth_sendTransaction',
+        //     params: [{
+        //         from: currentAccount,
+        //         to: 'YOUR_SMART_CONTRACT_ADDRESS', // Replace with actual contract address
+        //         value: 'AMOUNT_IN_WEI_OR_LAMPORTS', // User's input amount converted to native token units
+        //         data: 'CONTRACT_FUNCTION_CALL_DATA' // Data for buy function
+        //     }]
+        // });
+    };
+
+    // Airdrop button functionality - with single claim per wallet and status updates
+    airdropBtn.onclick = async () => {
+        if (!currentAccount) {
+            alert("Please connect your wallet first!");
+            return;
+        }
+
+        if (hasClaimedAirdrop(currentAccount)) {
+            alert("You have already claimed your free AI GODS tokens with this wallet!");
+            return;
+        }
+
+        airdropBtn.disabled = true;
+        airdropBtn.textContent = "CLAIMING...";
+        status.innerHTML = "Claiming 100 AI GODS tokens...";
+        
+        // Simulate a network call or smart contract interaction
+        await new Promise(resolve => setTimeout(resolve, 3000)); // 3 second delay
+
+        // Assuming the claim was successful (in a real dApp, this would be a smart contract call confirmation)
+        markAirdropClaimed(currentAccount);
+        airdropBtn.textContent = "AIRDROP CLAIMED!";
+        airdropBtn.style.background = "#555"; // Change color to indicate claimed
+        airdropBtn.style.cursor = "not-allowed";
+        status.innerHTML = "Successfully claimed 100 AI GODS tokens!";
+        alert("Congratulations! You have claimed 100 free AI GODS tokens. Your wallet can only claim once.");
+    };
+
+    function copyReferralLink() {
+        const link = referralLinkInput.value;
+        if (link === "Connect wallet to generate referral link" || !currentAccount) {
+            alert("Please connect your wallet to generate and copy your referral link.");
+            return;
+        }
+        navigator.clipboard.writeText(link)
+            .then(() => {
+                alert("Referral link copied to clipboard!");
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert("Failed to copy link. Please try again or copy manually.");
+            });
+    }
+
+    // Update the live rate display dynamically based on fixed values
+    function updateLiveRate() {
+        const presalePriceUSD = 0.20; // 0.2 USD per AIGODS
+        // Assuming average prices for BNB, MATIC, SOL for demonstration
+        const bnbPriceUSD = 600; // Example
+        const maticPriceUSD = 0.7; // Example
+        const solPriceUSD = 150; // Example
+
+        const aigodsPerBnb = Math.round(bnbPriceUSD / presalePriceUSD);
+        const aigodsPerMatic = Math.round(maticPriceUSD / presalePriceUSD);
+        const aigodsPerSol = Math.round(solPriceUSD / presalePriceUSD);
+
+        document.querySelector('.rate').innerHTML = `Live Rate: 
+            1 BNB ≈ ${aigodsPerBnb.toLocaleString()} AIGODS • 
+            1 MATIC ≈ ${aigodsPerMatic.toLocaleString()} AIGODS • 
+            1 SOL ≈ ${aigodsPerSol.toLocaleString()} AIGODS`;
+    }
+
+    // Call updateLiveRate on load
+    document.addEventListener('DOMContentLoaded', updateLiveRate);
+
+
+  </script>
+</body>
+</html>
